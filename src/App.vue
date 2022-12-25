@@ -6,6 +6,19 @@ import { useDark, useScroll, useToggle } from "@vueuse/core";
 import ScrollTop from "./components/ScrollTop.vue";
 import Uploader from "./components/Uploader.vue";
 import Notification from "./components/Notification.vue";
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
+const openToast = () => {
+  toast({
+    component: Notification,
+    props: {
+      message: "This is default notification with title and body",
+      title: "Default notification",
+      variant: "danger",
+    },
+  });
+};
 const username = ref();
 
 const handle = () => {};
@@ -21,12 +34,20 @@ const text = ref("hello world");
 const handleUpload = (e: any) => {
   console.log(e);
 };
+
+const handleClose = (e: any) => {
+  alert("hello");
+};
 </script>
 
 <template>
   <div class="m-6">
+    <Btn @click="openToast">Toast me</Btn>
+
     <Notification
-      variant="success"
+      @close="handleClose"
+      variant="danger"
+      :loading="false"
       message="This is default notification with title and body"
       title="Default notification"
     />
