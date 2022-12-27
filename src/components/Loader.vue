@@ -33,7 +33,7 @@ const {} = toRefs(props);
             type="rotate"
             from="0 16 16"
             to="360 16 16"
-            dur="1s"
+            dur="0.7s"
             repeatCount="indefinite"
           ></animateTransform>
         </path>

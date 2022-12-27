@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useDropZone } from "@vueuse/core";
-import { ref, computed } from "vue";
+import { ref, computed, toRefs } from "vue";
+import LoadingOverlay from "./LoadingOverlay.vue";
 
 const dropZoneRef = ref<HTMLDivElement>();
 
@@ -9,6 +10,16 @@ function onDrop(files: File[] | null) {
   // called when files are dropped on zone
 }
 
+const props = withDefaults(
+  defineProps<{
+    loading?: boolean;
+  }>(),
+  {
+    loading: false,
+  }
+);
+
+const { loading } = toRefs(props);
 const emit = defineEmits(["drop"]);
 
 const inputRef = ref<HTMLInputElement>();
@@ -16,12 +27,12 @@ const { isOverDropZone } = useDropZone(dropZoneRef, onDrop);
 
 const dropClass = computed(() => {
   return (
-    `flex  cursor-pointer m-3 transition-all  select-none  flex-col justify-center items-center border-2 p-6 rounded-md border-dashed  max-w-2xl` +
+    `flex  cursor-pointer relative overflow-hidden m-3 transition-all  select-none  flex-col justify-center items-center border-2 p-6 rounded-md border-dashed  max-w-2xl` +
     ` ${
       isOverDropZone.value
         ? "dark:bg-primary dark:bg-opacity-30 bg-primary bg-opacity-20 border-primary border-opacity-70 dark:border-primary"
         : "dark:bg-gray-800 bg-gray-200 bg-opacity-50 hover:bg-opacity-75 border-gray-300 dark:border-gray-600"
-    }  `
+    } ${loading.value ? "pointer-events-none" : ""} `
   );
 });
 
@@ -41,6 +52,7 @@ const handleChange = (event: any) =>
 
 <template>
   <div @click="openFileDialog" ref="dropZoneRef" :class="[dropClass]">
+    <LoadingOverlay v-if="loading" />
     <input hidden ref="inputRef" type="file" @change="handleChange" />
     <img class="h-16 w-16 my-3" src="/images/image_icon.png" alt="" />
     <h4 class="font-semibold text-[15px] text-gray-800 dark:text-gray-200 my-2">

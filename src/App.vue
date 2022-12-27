@@ -7,6 +7,9 @@ import ScrollTop from "./components/ScrollTop.vue";
 import Uploader from "./components/Uploader.vue";
 import Notification from "./components/Notification.vue";
 import { useToast } from "vue-toastification";
+import Modal from "./components/Modal.vue";
+import LoadingOverlay from "./components/LoadingOverlay.vue";
+import Progress from "./components/Progress.vue";
 const toast = useToast();
 
 const openToast = () => {
@@ -32,15 +35,54 @@ const gender = ref("male");
 const text = ref("hello world");
 
 const handleUpload = (e: any) => {
+  uploaderLoading.value = true;
   console.log(e);
 };
 
 const handleClose = (e: any) => {
   alert("hello");
 };
+
+const isModalVisible = ref(false);
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+const openModal = () => {
+  isModalVisible.value = true;
+};
+
+const uploaderLoading = ref(false);
 </script>
 
 <template>
+  <div class="w-full m-6 max-w-2xl">
+    <Progress color="blue" :progress="30" />
+  </div>
+  <div class="m-6"><Btn @click="openModal">Open modal</Btn></div>
+  <Modal
+    title="This is the title of the modal"
+    :open="isModalVisible"
+    @close="closeModal"
+    size="lg"
+  >
+    <template v-slot:body>
+      <h4 class="font-semibold dark:text-gray-100 text-gray-800 text-lg">
+        Hello world
+      </h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 leading-7 my-3">
+        Thank you for your hard work and dedication this learning journey. Your
+        contributions have been valuable. Wishing you a Merry Christmas and a
+        Happy New Year. We can't wait to see what we will achieve in the future.
+      </p>
+    </template>
+    <template v-slot:footer>
+      <div class="w-full gap-3 flex justify-end items-center">
+        <Btn @click="closeModal" color="danger">cancel</Btn>
+        <Btn>save order</Btn>
+      </div>
+    </template>
+  </Modal>
   <div class="m-6">
     <Btn @click="openToast">Toast me</Btn>
 
@@ -53,7 +95,9 @@ const handleClose = (e: any) => {
     />
   </div>
   <ScrollTop />
-  <Uploader @drop="handleUpload" />
+
+  <Uploader :loading="uploaderLoading" @drop="handleUpload" />
+
   <div class="m-6 flex items-center gap-4">
     <Avatar name="Hirwa Aldo" />
     <Avatar
