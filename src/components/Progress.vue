@@ -50,7 +50,13 @@ const colorClass = computed(() => {
 </script>
 
 <template>
-  <div :class="['w-full bg-gray-700', roundedClass, sizeClass]">
+  <div
+    :class="[
+      'w-full bg-gray-200 dark:bg-gray-700 overflow-hidden',
+      roundedClass,
+      sizeClass,
+    ]"
+  >
     <div
       :style="{ width: `${progress}%` }"
       :class="[

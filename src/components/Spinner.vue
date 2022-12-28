@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ color: string }>();
+defineProps<{ size?: "xs" | "sm" | "md" | "lg" | "xl" }>();
 </script>
 
 <template>

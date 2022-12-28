@@ -15,7 +15,7 @@ const { x, y, isScrolling, arrivedState, directions } = useScroll(window, {
     ><a
       @click="y = 0"
       v-if="!arrivedState.top"
-      class="bg-primary cursor-pointer inline-flex px-3 py-2 gap-2 fixed bottom-5 right-5 rounded-[3px] text-sm font-medium items-center text-white capitalize"
+      class="bg-primary z-50 cursor-pointer inline-flex px-3 py-2 gap-2 fixed bottom-5 right-5 rounded-[3px] text-sm font-medium items-center text-white capitalize"
     >
       <ArrowLongUpIcon
         stroke-width="3"

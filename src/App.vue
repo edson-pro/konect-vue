@@ -8,8 +8,14 @@ import Uploader from "./components/Uploader.vue";
 import Notification from "./components/Notification.vue";
 import { useToast } from "vue-toastification";
 import Modal from "./components/Modal.vue";
-import LoadingOverlay from "./components/LoadingOverlay.vue";
 import Progress from "./components/Progress.vue";
+import Alert from "./components/Alert.vue";
+import Select from "./components/Select.vue";
+import Overlay from "./components/Overlay.vue";
+import Loader from "./components/Loader.vue";
+import Skeleton from "./components/Skeleton.vue";
+import DatePicker from "./components/DatePicker.vue";
+
 const toast = useToast();
 
 const openToast = () => {
@@ -53,9 +59,120 @@ const openModal = () => {
 };
 
 const uploaderLoading = ref(false);
+const selected = ref([]);
+
+const options = ref([
+  { code: "React", label: "React" },
+  { code: "Angular", label: "Angular" },
+  { code: "Svelte", label: "Svelte" },
+  { code: "Vue", label: "Vue", selectable: false },
+]);
+
+const users = ref([]);
+
+const selectedUser = ref();
+
+const countries: any = ref([]);
+
+const conts = ref(["rwanda", "burundi", "kenya", "tanzania"]);
+
+const asynL = (query: any) => {
+  loadingUsers.value = true;
+  return fetch(`https://api.github.com/search/users?q=${query}&per_page=10`)
+    .then((x) => x.json())
+    .then(({ items }) => {
+      const data = items.map((e: any) => {
+        return {
+          label: e.login,
+          value: e.id,
+        };
+      });
+      loadingUsers.value = false;
+      users.value = data;
+    })
+    .catch((e) => {
+      loadingUsers.value = false;
+      users.value = [];
+    });
+};
+
+const loadingUsers = ref(false);
+
+const showOverlay = ref(false);
+
+const toggleOverlay = () => {
+  showOverlay.value = !showOverlay.value;
+};
+
+const selectedDate = ref();
 </script>
 
 <template>
+  <div class="m-6">
+    <DatePicker
+      v-model="selectedDate"
+      placeholder="Pick date"
+      label="Event date"
+      :disabled="false"
+      :multi-calendars="true"
+    />
+  </div>
+  <div class="m-6">
+    <Skeleton :circle="true" width="60px" height="60px" />
+    <Skeleton rounded="md" margin="mt-3" width="250px" height="15px" />
+    <Skeleton margin="my-2" rounded="md" width="350px" height="10px" />
+    <Skeleton rounded="md" width="350px" height="10px" />
+  </div>
+  <div class="m-6">
+    <Loader />
+  </div>
+  <div class="m-6">
+    <Btn @click="toggleOverlay" color="danger">Show Overlay</Btn>
+  </div>
+
+  <Overlay
+    @click="toggleOverlay"
+    :blur="true"
+    :zIndex="1000"
+    v-show="showOverlay"
+  />
+  <div class="m-6 max-w-xl">
+    <Select
+      :multiple="false"
+      placeholder="Pick one"
+      :options="users"
+      :async="true"
+      :taggable="false"
+      v-model="selectedUser"
+      :loading="loadingUsers"
+      @load="asynL"
+      :disabled="true"
+      label="Your favorite contributters/users"
+    />
+
+    <Select
+      :multiple="true"
+      placeholder="Pick one"
+      :options="['one', 'two', 'three']"
+      :taggable="true"
+      v-model="selected"
+      :loading="loadingUsers"
+      @load="asynL"
+      label="Your favorite contributters/users"
+    />
+  </div>
+
+  <div class="m-6 max-w-sm">
+    <Alert
+      rounded="sm"
+      label
+      color="primary"
+      :close-button="true"
+      title="Bummer!"
+      variant="light"
+      desc="Something terrible happened! You made a mistake and there is no going back,"
+    />
+  </div>
   <div class="w-full m-6 max-w-2xl">
     <Progress color="blue" :progress="30" />
   </div>

@@ -1,27 +1,45 @@
 <script setup lang="ts">
-import { toRefs } from "vue";
+import { computed, toRefs } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    size?: "sm" | "md" | "lg";
-    color?: string;
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    color?: "primary" | "danger" | "success" | "dark" | "white";
   }>(),
   {
-    size: "md",
+    size: "xs",
+    color: "primary",
   }
 );
 
-const {} = toRefs(props);
+const { size, color } = toRefs(props);
+
+const sizeClass = computed(() => {
+  return {
+    xs: "w-[18px] h-[18px]",
+    sm: "w-[22px] h-[22px]",
+    md: "w-[36px] h-[36px]",
+    lg: "w-[44px] h-[44px]",
+    xl: "w-[58px] h-[58px]",
+  }[size.value];
+});
+
+const colorClass = computed(() => {
+  return {
+    primary: "text-primary stroke-current",
+    danger: "text-red-500 stroke-current",
+    success: "text-green-500 stroke-current",
+    white: "text-white stroke-current",
+    dark: "text-gray-700 stroke-current",
+  }[color.value];
+});
 </script>
 
 <template>
   <svg
-    width="28px"
-    height="28px"
     viewBox="0 0 38 38"
     xmlns="http://www.w3.org/2000/svg"
-    stroke="#1971c2"
-    class="mantine-Notification-loader mantine-1ay9vb9"
+    :class="[sizeClass, colorClass]"
     role="presentation"
   >
     <g fill="none" fill-rule="evenodd">

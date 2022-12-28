@@ -27,3 +27,165 @@ body {
 .Vue-Toastification__close-button {
   display: none !important;
 }
+
+.v-select {
+  @apply bg-white dark:bg-gray-800 relative box-border bg-opacity-70 flex w-full items-center px-2 rounded-[4px] border border-gray-300 dark:border-gray-700 text-sm min-h-[45px];
+}
+.vs--error {
+  @apply border-red-500;
+}
+.vs__selected-options {
+  @apply flex basis-full grow flex-wrap py-[2px] relative;
+}
+.vs__actions {
+  @apply flex items-center;
+  padding: 4px 6px 0 3px;
+}
+.vs--open .vs__open-indicator {
+  transform: rotate(180deg) scale(1);
+}
+.vs__open-indicator {
+  fill: rgba(60, 60, 60, 0.5);
+  transform: scale(1);
+  transition: transform 0.15s cubic-bezier(1, -0.115, 0.975, 0.855);
+  transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);
+}
+.vs__no-options {
+  @apply text-center;
+}
+.vs--loading .vs__open-indicator {
+  @apply opacity-0;
+}
+.vs__dropdown-toggle {
+  @apply w-full border-none rounded-none p-0 flex items-center;
+}
+.vs__search {
+  @apply text-gray-400 px-2 font-medium text-sm border-none outline-none m-0 p-0 bg-transparent w-0 max-w-full flex-grow;
+}
+
+.vs__dropdown-menu {
+  @apply text-left mt-[5px] shadow-md rounded-[4px] bg-white dark:bg-gray-800 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 list-none block box-border absolute top-full left-0  z-[1000] px-1 m-0 w-full max-h-[350px] min-w-[160px] overflow-y-hidden;
+}
+
+.vs__dropdown-option {
+  @apply flex items-center cursor-pointer px-3 capitalize py-[6px] rounded-[3px] leading-7 dark:font-normal font-medium whitespace-normal text-gray-600 dark:text-gray-300 clear-both;
+}
+.vs__dropdown-option--highlight {
+  @apply bg-primaryLight text-white;
+}
+
+.vs__dropdown-option--disabled {
+  @apply bg-primaryLight opacity-60 cursor-not-allowed text-white;
+}
+.vs__clear {
+  @apply text-gray-500 fill-current stroke-2 mr-3 cursor-pointer;
+}
+
+.datapicker {
+  font-family: "Poppins" !important;
+}
+.datepicker__cell {
+  @apply !text-gray-700 dark:!text-gray-200;
+}
+.dp__cell_offset {
+  @apply !text-gray-400 dark:!text-gray-500;
+}
+.datepicker__cell.dp__today {
+  @apply border-primary border rounded-[4px];
+}
+.dp__month_year_select {
+  @apply text-sm font-medium !rounded-[3px] text-primaryLight;
+}
+.dp__month_year_row {
+  @apply my-[6px];
+}
+.dp__overlay_cell_pad {
+  @apply text-sm text-gray-800 dark:text-white font-medium font-sans;
+}
+.dp__overlay_cell_active {
+  @apply !bg-primary  !text-white !rounded-[3px];
+}
+.dp__overlay_cell:hover {
+  @apply !bg-primary px-2 !bg-opacity-20 !text-primaryLight;
+}
+.dp__time_display {
+  @apply text-gray-800 dark:!text-white text-xl font-medium font-sans;
+}
+.dp__time_display:hover {
+  @apply !bg-primary !bg-opacity-20 !text-primaryLight;
+}
+.dp__inc_dec_button {
+  @apply !m-1;
+}
+.dp__inc_dec_button:hover {
+  @apply !m-1 !bg-primary !bg-opacity-20 !text-primaryLight;
+}
+.dp__button {
+  @apply !bg-white dark:!bg-slate-800 border-t !border-gray-200 dark:!border-gray-700;
+}
+.dp__time_col {
+  @apply !text-gray-800 dark:!text-white;
+}
+.dp__calendar_header {
+  @apply !w-full !justify-between px-2;
+}
+.dp__cell_inner {
+  @apply !w-full;
+}
+.dp__calendar_row {
+  @apply !w-full !justify-between px-2;
+}
+.dp__calendar {
+  @apply !w-full !pb-1;
+}
+.dp__menu {
+  @apply !min-w-[300px] !font-sans shadow-md;
+}
+.dp__menu {
+  @apply !text-gray-800 dark:text-gray-100 dark:!bg-slate-800 !border-gray-200 dark:!border-gray-700;
+}
+.dp__calendar_header_separator {
+  @apply !bg-gray-200 dark:!bg-gray-700;
+}
+.dp__date_hover_end:hover {
+  @apply !bg-primary !text-white;
+}
+.dp__range_between {
+  @apply !text-gray-600 dark:!bg-gray-700 bg-opacity-50 border-opacity-50 !border-t-gray-200 dark:!border-t-gray-700 !border-b-gray-200 dark:!border-b-gray-700;
+}
+.dp__overlay {
+  @apply bg-slate-100 dark:!bg-slate-800;
+}
+.dp__month_year_row {
+  @apply px-2;
+}
+.dp__button_bottom {
+  @apply !bg-slate-50 dark:!bg-slate-800 border-t !border-gray-200 dark:!border-gray-700;
+}
+.dp__arrow_top {
+  @apply hidden;
+}
+.dp__calendar_header_item {
+  @apply text-gray-800 dark:text-white;
+}
+.dp__month_year_select:hover {
+  @apply !bg-primary !bg-opacity-20 !text-primaryLight;
+}
+.dp__button:hover {
+  @apply !bg-primary !bg-opacity-20 !text-primaryLight;
+}
+.dp__inner_nav {
+  @apply !h-[35px] !w-[35px];
+}
+.dp__inner_nav:hover {
+  @apply !bg-primary !bg-opacity-20 !text-primaryLight;
+}
+.dp__inner_nav svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+.datepicker__cell.dp__range_end,
+.datepicker__cell.dp__range_start,
+.datepicker__cell.dp__active_date {
+  @apply bg-primary text-white;
+}

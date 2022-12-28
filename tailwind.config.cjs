@@ -9,6 +9,7 @@ module.exports = {
       },
       colors: {
         primary: "#047857",
+        primaryLight: "#05b081",
       },
       screens: {
         xl: { max: "1279px" },
