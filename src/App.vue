@@ -15,6 +15,8 @@ import Overlay from "./components/Overlay.vue";
 import Loader from "./components/Loader.vue";
 import Skeleton from "./components/Skeleton.vue";
 import DatePicker from "./components/DatePicker.vue";
+import Slider from "./components/Slider.vue";
+import Editor from "./components/Editor.vue";
 
 const toast = useToast();
 
@@ -105,9 +107,29 @@ const toggleOverlay = () => {
 };
 
 const selectedDate = ref();
+
+const slider = ref([5, 10]);
+
+const content = ref();
 </script>
 
 <template>
+  <div class="m-6 max-w-2xl">
+    <Editor v-model="content" placeholder="Start typing here" />
+  </div>
+  <div class="m-6">
+    <RichTextVue />
+  </div>
+  <div class="my-16 mx-6 max-w-sm">
+    {{ slider }}
+    <Slider
+      v-model="slider"
+      :disabled="true"
+      :interval="1"
+      :min="0"
+      :max="20"
+    />
+  </div>
   <div class="m-6">
     <DatePicker
       v-model="selectedDate"
