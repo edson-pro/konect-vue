@@ -61,7 +61,7 @@ const colorClass = computed(() => {
     success: "bg-green-500",
   }[color.value];
   const texts = {
-    primary: "text-primary",
+    primary: "text-primaryLight",
     danger: "text-red-500",
     success: "bg-green-500",
   }[color.value];
@@ -103,7 +103,7 @@ const sizeClass = computed(() => {
 
 const globalClass = computed(() => {
   return (
-    "inline-flex items-center justify-center relative my-1 cursor-pointer select-none active:translate-y-[1px]" +
+    "inline-flex items-center truncate justify-center relative my-1 cursor-pointer select-none active:translate-y-[1px]" +
     ` ${
       disabled.value || loading?.value ? "pointer-events-none  opacity-70" : ""
     } ${fullWidth.value ? "w-full" : ""}`

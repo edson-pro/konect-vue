@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { computed, toRefs } from "vue";
+import Loader from "./Loader.vue";
 
 const props = withDefaults(
   defineProps<{
     placeholder?: string;
     modelValue?: string;
     label?: string;
+    leftIcon?: any;
+    loading?: boolean;
     error?: string;
     disabled?: boolean;
     size: "sm" | "md" | "lg";
@@ -52,7 +55,7 @@ const sizeClass = computed(() => {
 });
 const globalClass = computed(() => {
   return (
-    "outline-none mt-2 mb-[2px] max-w-xl" +
+    "outline-none mb-[2px] max-w-xl" +
     ` ${disabled?.value ? "pointer-events-none opacity-70" : ""} ` +
     (error?.value
       ? " placeholder-red-500 text-red-500"
@@ -62,7 +65,7 @@ const globalClass = computed(() => {
 
 const globalLabelClass = computed(() => {
   return (
-    "block dark:text-gray-200 text-sm font-medium dark:text-gray-300 text-gray-700" +
+    "block mb-2  dark:text-gray-200 text-sm font-medium dark:text-gray-300 text-gray-700" +
     ` ${disabled?.value ? "pointer-events-none opacity-70" : ""}`
   );
 });
@@ -77,15 +80,36 @@ const emit = defineEmits<{
 <template>
   <div class="flex flex-col">
     <label :class="globalLabelClass" v-if="label">{{ label }}</label>
-    <input
-      v-bind="$attrs"
-      :value="modelValue"
-      @input="
-        emit('update:modelValue', ($event.target as HTMLInputElement).value)
-      "
-      :placeholder="placeholder"
-      :class="[variantClass, roundedClass, sizeClass, globalClass]"
-    />
+    <div class="relative">
+      <div v-if="leftIcon">
+        <component
+          class="w-5 h-5 text-gray-400 absolute top-[23%] left-3"
+          :is="leftIcon"
+        />
+      </div>
+      <div v-if="loading">
+        <component
+          color="default"
+          class="w-5 h-5 text-gray-400 absolute top-[27%] right-3"
+          :is="Loader"
+        />
+      </div>
+      <input
+        v-bind="$attrs"
+        :value="modelValue"
+        @input="
+          emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
+        :placeholder="placeholder"
+        :class="[
+          variantClass,
+          roundedClass,
+          sizeClass,
+          globalClass,
+          leftIcon ? 'pl-10' : '',
+        ]"
+      />
+    </div>
   </div>
   <span class="text-[13px] font-medium text-red-500" v-if="error">{{
     error

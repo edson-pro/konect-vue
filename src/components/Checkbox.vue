@@ -4,35 +4,32 @@ import { toRefs } from "vue";
 const props = withDefaults(
   defineProps<{
     label?: string;
-    modelValue?: boolean;
+    checked?: boolean;
   }>(),
   {
-    modelValue: false,
+    checked: false,
   }
 );
 
-const {} = toRefs(props);
+const { checked } = toRefs(props);
 
-const emit = defineEmits<{
-  (
-    e: "update:modelValue",
-    value: HTMLInputElement["checked"]
-  ): HTMLInputElement["checked"];
-}>();
+const emit = defineEmits(["change"]);
+
+const handleChange = (e) => {
+  emit("change", (e.target as HTMLInputElement).checked);
+};
 </script>
 
 <template>
   <div class="flex my-2 items-center">
     <div>
       <input
-        class="form-check-input appearance-none h-4 w-4 border checked:dark:border-primary dark:border-gray-500 border-gray-300 rounded-sm bg-transparent checked:bg-primary checked:border-primary focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+        class="form-check-input appearance-none h-4 w-4 border checked:dark:border-primary dark:border-gray-600 border-gray-400 rounded-sm bg-transparent checked:bg-primary checked:border-primary focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
         type="checkbox"
         :id="label"
-        v-bind:checked="modelValue"
+        :checked="checked"
         v-bind="$attrs"
-        @input="
-          emit('update:modelValue', ($event.target as HTMLInputElement).checked)
-        "
+        @input="handleChange"
       />
     </div>
 

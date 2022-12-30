@@ -17,6 +17,9 @@ import Skeleton from "./components/Skeleton.vue";
 import DatePicker from "./components/DatePicker.vue";
 import Slider from "./components/Slider.vue";
 import Editor from "./components/Editor.vue";
+import DataTable from "./components/DataTable.vue";
+import Pagination from "./components/Pagination.vue";
+import Menu from "./components/Menu.vue";
 
 const toast = useToast();
 
@@ -111,9 +114,183 @@ const selectedDate = ref();
 const slider = ref([5, 10]);
 
 const content = ref();
+
+const columns = [
+  {
+    name: "name",
+    indexName: "name",
+  },
+  {
+    name: "total",
+    indexName: "total",
+  },
+  {
+    name: "used",
+    indexName: "used",
+  },
+  {
+    name: "percentage",
+    indexName: "percentage",
+  },
+  {
+    name: "category",
+    indexName: "category",
+  },
+  { name: "status", indexName: "status" },
+];
+const data = [
+  {
+    id: 1,
+    name: "Electricity power",
+    total: 5000,
+    used: 2500,
+    percentage: "50%",
+    category: "electricity",
+    status: "partiall",
+  },
+  {
+    id: 2,
+    name: "Cement de novel",
+    total: 10000,
+    used: 10000,
+    percentage: "100%",
+    category: "cement",
+    status: "completed",
+  },
+  {
+    id: 3,
+    name: "Water planting",
+    total: 2400,
+    used: 0,
+    percentage: "0%",
+    category: "water",
+    status: "waiting",
+  },
+  {
+    id: 4,
+    name: "Masions and other",
+    total: 7000,
+    used: 7000,
+    percentage: "100%",
+    category: "labors",
+    status: "completed",
+  },
+  {
+    id: 5,
+    name: "painting and construction",
+    total: 1000,
+    used: 200,
+    percentage: "20%",
+    category: "designs",
+    status: "paused",
+  },
+  {
+    id: 6,
+    name: "designs and utilities",
+    total: 6000,
+    used: 300,
+    percentage: "50%",
+    category: "designs",
+    status: "partiall",
+  },
+  {
+    id: 7,
+    name: "security ",
+    total: 9000,
+    used: 2500,
+    percentage: "100%",
+    category: "labour",
+    status: "completed",
+  },
+];
+
+const formater = (e) => {
+  return {
+    ...e,
+    total: e.total.toLocaleString() + " FRW",
+    used: e.used.toLocaleString() + " FRW",
+  };
+};
+const currentPage = ref(2);
+
+const handlePageChange = (page) => {
+  currentPage.value = page;
+};
+
+const actions = [
+  { title: "view expence", action: "view", click: () => {} },
+  { title: "update expence", action: "update", click: () => {} },
+  { title: "duplicate expence", action: "copy", click: () => {} },
+  {
+    title: "delete expence",
+    action: "delete",
+    group: "danger",
+    click: () => {},
+  },
+];
+
+const handleAction = (e) => {
+  switch (e.action) {
+    case "delete":
+      console.log("delete", e.id);
+      break;
+    case "update":
+      console.log("update", e.id);
+
+      break;
+    case "copy":
+      console.log("duplicate", e.id);
+
+      break;
+    case "view":
+      console.log("view", e.id);
+
+      break;
+    default:
+      break;
+  }
+};
+
+const filters = [
+  { title: "all", name: "all" },
+  { title: "canceled", name: "canceled" },
+  { title: "partail", name: "partail" },
+  { title: "waiting", name: "waiting" },
+  { title: "completed", name: "completed" },
+];
+const activefilter = ref("all");
+const handleFilter = (e) => {
+  activefilter.value = e;
+};
+
+const handleSearch = (e) => {
+  console.log(e);
+};
 </script>
 
 <template>
+  <div class="m-6">
+    <Pagination
+      :size="15"
+      :total="200"
+      @page-change="handlePageChange"
+      :page="currentPage"
+    />
+  </div>
+  <div class="m-6 max-w-5xl">
+    <DataTable
+      @search="handleSearch"
+      :filters="filters"
+      @filter="handleFilter"
+      title="Project expences"
+      @action="handleAction"
+      :activefilter="activefilter"
+      :actions="actions"
+      :data="data.map((e) => formater(e))"
+      :colums="columns"
+    />
+  </div>
+
   <div class="m-6 max-w-2xl">
     <Editor v-model="content" placeholder="Start typing here" />
   </div>

@@ -4,7 +4,7 @@ import { computed, toRefs } from "vue";
 const props = withDefaults(
   defineProps<{
     size?: "xs" | "sm" | "md" | "lg" | "xl";
-    color?: "primary" | "danger" | "success" | "dark" | "white";
+    color?: "primary" | "danger" | "success" | "dark" | "white" | "default";
   }>(),
   {
     size: "xs",
@@ -31,6 +31,7 @@ const colorClass = computed(() => {
     success: "text-green-500 stroke-current",
     white: "text-white stroke-current",
     dark: "text-gray-700 stroke-current",
+    default: "dark:text-gray-400 text-gray-600  stroke-current",
   }[color.value];
 });
 </script>
