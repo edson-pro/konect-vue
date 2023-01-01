@@ -10,6 +10,17 @@ html.dark {
 body {
   @apply bg-gray-50 dark:bg-gray-900 text-gray-500;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply dark:text-gray-100 text-gray-800;
+}
+.sub-title {
+  @apply dark:text-gray-400 text-gray-600;
+}
 
 .Vue-Toastification__toast {
   background-color: transparent !important;

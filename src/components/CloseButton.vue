@@ -5,7 +5,7 @@ const emit = defineEmits(["click"]);
 <template>
   <a
     @click="emit('click')"
-    class="h-7 w-7 text-gray-700 active:translate-y-[1px] dark:text-gray-100 flex items-center justify-center rounded-sm cursor-pointer hover:bg-gray-200 hover:bg-opacity-10"
+    class="h-7 w-7 text-gray-700 active:translate-y-[1px] dark:text-gray-100 flex items-center justify-center rounded-sm cursor-pointer hover:bg-gray-100 hover:bg-opacity-5"
     ><svg
       viewBox="0 0 15 15"
       fill="none"

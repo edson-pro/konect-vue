@@ -118,10 +118,12 @@ const handleSearch = (e) => {
         >
           <div
             v-if="title"
-            class="bg-gray-800 px-4 justify-between flex items-center bg-opacity-50 border-b border-gray-700"
+            class="dark:bg-gray-800 bg-opacity-50 px-4 bg-gray-200 justify-between flex items-center dark:bg-opacity-50 border-b border-gray-300 dark:border-gray-700"
           >
             <div class="px-1">
-              <h4 class="font-medium tracking-wide text-[15px] text-gray-200">
+              <h4
+                class="dark:font-medium tracking-wide text-[15px] text-gray-700 font-semibold dark:text-gray-200"
+              >
                 {{ title }}
               </h4>
             </div>
@@ -134,7 +136,7 @@ const handleSearch = (e) => {
                     :class="[
                       activefilter === filter.name
                         ? 'text-primaryLight font-semibold'
-                        : 'text-gray-400 font-medium ',
+                        : 'dark:text-gray-400 text-gray-800 font-medium ',
                       ' w-[130px] cursor-pointer relative text-center capitalize text-sm py-3',
                     ]"
                   >
@@ -148,7 +150,9 @@ const handleSearch = (e) => {
               </div>
             </div>
           </div>
-          <div class="flex items-center justify-between px-4 py-3">
+          <div
+            class="flex items-center border-b border-gray-300 dark:border-gray-700 border-opacity-75 justify-between px-4 py-3"
+          >
             <div class="w-full">
               <div class="max-w-xs">
                 <Input

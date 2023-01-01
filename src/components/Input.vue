@@ -29,7 +29,7 @@ const variantClass = computed(() => {
     default:
       " block w-full sm:text-sm border dark:bg-gray-800 dark:bg-opacity-80 bg-transparent " +
       (error?.value
-        ? " border-red-500"
+        ? " dark:border-red-600 border-red-500"
         : "dark:border-gray-700 dark:border-opacity-70 border-gray-300"),
     filled:
       " block w-full sm:text-sm bg-opacity-50 border-opacity-50  border dark:bg-gray-800 dark:bg-gray-800 dark:border-gray-800 bg-gray-200  border-gray-200 ",
@@ -111,9 +111,11 @@ const emit = defineEmits<{
       />
     </div>
   </div>
-  <span class="text-[13px] font-medium text-red-500" v-if="error">{{
-    error
-  }}</span>
+  <span
+    class="text-[13px] capitalize dark:font-normal font-medium text-red-500"
+    v-if="error"
+    >{{ error }}</span
+  >
 </template>
 
 <style lang=""></style>

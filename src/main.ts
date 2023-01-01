@@ -11,10 +11,11 @@ import Textarea from "./components/Textarea.vue";
 import Avatar from "./components/Avatar.vue";
 import Toast, { PluginOptions, POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
-// import "./vue-multiselect.min.css";
-// import "vue-select/dist/vue-select.css";
+import { createPinia } from "pinia";
+import router from "./router";
 
 const app = createApp(App);
+const pinia = createPinia();
 
 app.component("Btn", Button);
 app.component("Input", Input);
@@ -30,5 +31,8 @@ const options: PluginOptions = {
   hideProgressBar: true,
 };
 
+app.use(pinia);
 app.use(Toast, options);
+app.use(router);
+
 app.mount("#app");

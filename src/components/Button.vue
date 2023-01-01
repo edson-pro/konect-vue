@@ -48,7 +48,7 @@ const variantClass = computed(() => {
     filled: "bg-opacity-95 hover:bg-opacity-100 text-white",
     light: "bg-opacity-20 hover:bg-opacity-25 text-white",
     outline: "bg-opacity-0 hover:bg-opacity-10 border",
-    default: "bg-opacity-0 hover:bg-opacity-5 border",
+    default: "bg-opacity-50 dark:border-gray-700 hover:bg-opacity-75 border",
     subtle: "bg-opacity-0 hover:bg-opacity-10",
     white: "bg-white",
   }[variant.value];
@@ -73,7 +73,7 @@ const colorClass = computed(() => {
   return variant.value === "white"
     ? "text-primary"
     : variant.value === "default"
-    ? "text-gray-800 border-gray-300 bg-gray-800"
+    ? "text-gray-800 dark:text-gray-400 border-gray-300 bg-gray-800"
     : variant.value === "subtle"
     ? `${texts} + ${bgs}`
     : bgs +

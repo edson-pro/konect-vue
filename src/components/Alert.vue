@@ -6,10 +6,10 @@ const props = withDefaults(
   defineProps<{
     title?: string;
     desc?: string;
-    closeButton: boolean;
-    rounded: "xs" | "sm" | "md" | "lg" | "xl";
-    color: "primary" | "danger" | "success";
-    variant: "filled" | "light" | "outline";
+    closeButton?: boolean;
+    rounded?: "xs" | "sm" | "md" | "lg" | "xl";
+    color?: "primary" | "danger" | "success";
+    variant?: "filled" | "light" | "outline";
   }>(),
   {
     clossButton: false,
@@ -68,7 +68,7 @@ const roundedClass = computed(() => {
 });
 
 const globalClass = computed(() => {
-  return "p-2 pb-4";
+  return "p-2 pb-2";
 });
 </script>
 
@@ -98,9 +98,9 @@ const globalClass = computed(() => {
         />
       </svg>
     </div>
-    <div class="flex flex-col gap-1">
-      <div class="flex items-center justify-between">
-        <h4 :class="['text-sm leading-6 font-semibold', titleClass]">
+    <div class="flex flex-col gap-1 w-full">
+      <div class="flex w-full items-center justify-between">
+        <h4 :class="['text-sm leading-6 font-medium', titleClass]">
           {{ title }}
         </h4>
         <div class="m-1 h-[28px] w-[28px]">
@@ -111,7 +111,10 @@ const globalClass = computed(() => {
           />
         </div>
       </div>
-      <p class="text-[13.5px] font-medium dark:font-normal leading-7">
+      <p
+        v-if="desc"
+        class="text-[13.5px] pb-2 font-medium dark:font-normal leading-7"
+      >
         {{ desc }}
       </p>
     </div>
