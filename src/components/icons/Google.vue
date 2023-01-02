@@ -3,8 +3,7 @@
 <template>
   <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
   <svg
-    width="800px"
-    height="800px"
+    v-bind="$attrs"
     viewBox="0 0 16 16"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

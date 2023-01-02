@@ -8,7 +8,7 @@ const { value, setValue }: any = useField("formStatus");
 <template>
   <template v-if="value">
     <Alert
-      :color="value.type === 'error' ? 'danger' : null"
+      :color="value.type === 'error' ? 'danger' : 'success'"
       variant="light"
       :closeButton="true"
       @close="setValue(null)"

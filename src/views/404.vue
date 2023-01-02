@@ -1,11 +1,38 @@
 <script setup lang="ts"></script>
 
 <template>
-  !!Opps, Page Not Foung
-  <br />
-  <Btn @click="$router.push({ path: '/', query: { from: '404' } })"
-    >Go Back Home</Btn
-  >
+  <div class="min-h-full pt-20 pb-10 flex flex-col bg-gray-900">
+    <main
+      class="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8"
+    >
+      <div class="flex-shrink-0 flex justify-center">
+        <a href="/" class="inline-flex">
+          <span class="sr-only">Workflow</span>
+          <img class="h-24 w-auto" src="/images/404-error.png" alt="" />
+        </a>
+      </div>
+      <div class="py-8">
+        <div class="text-center flex flex-col items-center justify-center">
+          <div>
+            <p
+              class="rounded w-fit bg-primaryLight bg-opacity-25 px-2.5 py-1 text-xs font-semibold text-primaryLight tracking-wide uppercase"
+            >
+              404 error
+            </p>
+          </div>
+          <h1 class="my-3 font-semibold text-gray-200 tracking-tight text-2xl">
+            Page not found.
+          </h1>
+          <p class="mt-2 text-sm font-medium text-gray-400">
+            Sorry, we couldn’t find the page you’re looking for.
+          </p>
+          <div class="mt-6">
+            <Btn>Take me back home</Btn>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style scoped></style>

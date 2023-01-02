@@ -41,7 +41,7 @@ const {
 const emit = defineEmits(["click"]);
 
 const type = computed(() => {
-  return href ? "a" : "button";
+  return href.value ? "router-link" : "button";
 });
 const variantClass = computed(() => {
   return {
@@ -96,7 +96,7 @@ const roundedClass = computed(() => {
 const sizeClass = computed(() => {
   return {
     sm: "px-2 py-2  leading-4 font-medium  text-[13px] ",
-    md: "px-4 py-2 font-medium text-sm",
+    md: "px-4 py-[9px] font-medium text-sm",
     lg: "px-5 py-3 font-medium text-base",
   }[size.value];
 });
@@ -117,16 +117,19 @@ const globalClass = computed(() => {
     :disabled="disabled || loading"
     @click="emit('click')"
     :is="type"
-    :href="href"
+    :to="href"
     class=""
     :class="[variantClass, colorClass, roundedClass, sizeClass, globalClass]"
   >
     <component
       v-if="leftIcon && !loading"
       :is="leftIcon"
-      class="h-4 w-4 stroke-2 mr-2"
+      :class="[fullWidth ? 'mr-4' : 'mr-2', 'h-5 w-5 stroke-2 ']"
     />
-    <div v-if="loaderPosition === `left` && loading" class="mr-2">
+    <div
+      v-if="loaderPosition === `left` && loading"
+      :class="[fullWidth ? 'mr-4' : 'mr-2']"
+    >
       <Spinner />
     </div>
     <slot />

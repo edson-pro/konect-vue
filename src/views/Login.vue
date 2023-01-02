@@ -2,13 +2,15 @@
 import * as Yup from "Yup";
 import AuthServices from "@/services/auth.services";
 import handleRedirect from "@/utils/handleRedirect";
-import second from "first";
+import GoogleIcon from "@/components/icons/Google.vue";
 import {
   AppForm,
   AppFormStatus,
   SubmitButton,
   AppFormInput,
 } from "@/components/forms";
+import { ref } from "vue";
+import getRedirect from "@/utils/getRedirect";
 
 const initial = {
   email: "",
@@ -18,6 +20,7 @@ const schema = Yup.object({
   email: Yup.string().required().email(),
   password: Yup.string().required().min(6),
 });
+const googleLoading = ref(false);
 
 const handeLogin = ({ email, password }, actions) => {
   return new AuthServices()
@@ -34,14 +37,20 @@ const handeLogin = ({ email, password }, actions) => {
       actions.setIsLoading(false);
     });
 };
+
+const handleGoogleLogin = () => {
+  return new AuthServices().signWithGoogle({
+    redirect: getRedirect("/projects/"),
+  });
+};
 </script>
 
 <template>
-  <div class="m-16 max-w-md">
+  <div class="px-3 mx-auto max-w-md">
     <div
-      class="flex items-center my-10 gap-3 justify-center flex-col text-center"
+      class="flex items-center my-10 gap-2 justify-center flex-col text-center"
     >
-      <h4 class="text-xl font-semibold">Welcome Back</h4>
+      <h4 class="text-xl title font-medium">Welcome Back</h4>
       <p class="sub-title leading-7 max-w-md font-medium text-sm">
         Lorem ipsum dolor sit amet, consectetur adipisicing <br />
         elit, sed do eiusmod .
@@ -60,22 +69,40 @@ const handeLogin = ({ email, password }, actions) => {
         label="Your password"
         name="password"
       />
-      <div class="mb-1">
+      <div class="mb-3 flex items-center justify-between">
         <Checkbox label="Remember me" />
+        <router-link to="/forgot-password"
+          ><span class="text-sm text-primaryLight font-medium"
+            >Forgot your password?</span
+          ></router-link
+        >
       </div>
       <SubmitButton @submit="handeLogin" :fullWidth="true">
         Login your account
       </SubmitButton>
-      <div
-        class="my-3 flex items-center text-sm justify-center text-gray-400 font-medium gap-2"
-      >
-        <span>Don't have an account?</span>
-        <router-link to="/register"
-          ><span class="text-primary">Sign Up.</span></router-link
-        >
-      </div>
-      <Btn variant="default" :fullWidth="true">Continue with Google</Btn>
     </AppForm>
+
+    <div className="flex justify-center or items-center text-gray-500 my-4">
+      <span className="text-sm mx-2 font-semibold">OR</span>
+    </div>
+    <div>
+      <Btn
+        :loading="googleLoading"
+        :leftIcon="GoogleIcon"
+        @click="handleGoogleLogin"
+        variant="default"
+        :fullWidth="true"
+        >Continue with Google</Btn
+      >
+    </div>
+    <div
+      class="my-5 flex items-center text-sm justify-center text-gray-400 font-medium gap-2"
+    >
+      <span>Don't have an account?</span>
+      <router-link to="/register"
+        ><span class="text-primaryLight">Sign Up.</span></router-link
+      >
+    </div>
   </div>
 </template>
 

@@ -5,8 +5,9 @@ useAuthComposable();
 </script>
 
 <template>
-  <MainLayout />
-  <router-view></router-view>
+  <MainLayout>
+    <router-view> </router-view>
+  </MainLayout>
 </template>
 
 <style scoped></style>

@@ -1,20 +1,40 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
-import Register from "../views/Register.vue";
-import Login from "../views/Login.vue";
-import Projects from "../views/Projects.vue";
-import Dashboard from "../views/projects/Dashboard.vue";
-import PageNotFound from "../views/404.vue";
-import Expenses from "../views/projects/expenses/Expenses.vue";
-import useAuth from "../store/auth";
+import Home from "@/views/Home.vue";
+import About from "@/views/About.vue";
+import Register from "@/views/Register.vue";
+import ForgotPassword from "@/views/ForgotPassword.vue";
+import ResetPassword from "@/views/ResetPassword.vue";
+import Login from "@/views/Login.vue";
+import Projects from "@/views/Projects.vue";
+import Dashboard from "@/views/projects/Dashboard.vue";
+import PageNotFound from "@/views/404.vue";
+import Expenses from "@/views/projects/expenses/Expenses.vue";
+import useAuth from "@/store/auth";
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 };
+  },
   routes: [
     {
       path: "/",
       component: Home,
+      meta: {
+        public: true,
+      },
+    },
+    {
+      path: "/forgot-password",
+      component: ForgotPassword,
+      meta: {
+        public: true,
+      },
+    },
+    {
+      path: "/reset-password",
+      component: ResetPassword,
       meta: {
         public: true,
       },
@@ -49,7 +69,14 @@ const router = createRouter({
       path: "/projects/:id/expenses",
       component: Expenses,
     },
-    { path: "/:pathMatch(.*)*", name: "NotFound", component: PageNotFound },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: PageNotFound,
+      meta: {
+        public: true,
+      },
+    },
   ],
 });
 

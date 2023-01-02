@@ -8,18 +8,19 @@ html.dark {
   color-scheme: dark;
 }
 body {
-  @apply bg-gray-50 dark:bg-gray-900 text-gray-500;
+  @apply bg-gray-50 dark:bg-gray-900 text-gray-500 scroll-smooth;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.title {
   @apply dark:text-gray-100 text-gray-800;
 }
 .sub-title {
   @apply dark:text-gray-400 text-gray-600;
+}
+.or:after,
+.or:before {
+  content: "";
+  @apply w-1/2 bg-gray-700 bg-opacity-75 block;
+  height: 1px;
 }
 
 .Vue-Toastification__toast {

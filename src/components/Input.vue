@@ -1,11 +1,13 @@
 <script lang="ts" setup>
-import { computed, toRefs } from "vue";
+import { computed, toRefs, ref } from "vue";
 import Loader from "./Loader.vue";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline";
 
 const props = withDefaults(
   defineProps<{
     placeholder?: string;
     modelValue?: string;
+    type?: string;
     label?: string;
     leftIcon?: any;
     loading?: boolean;
@@ -19,6 +21,7 @@ const props = withDefaults(
     rounded: "sm",
     variant: "default",
     size: "md",
+    type: "text",
   }
 );
 
@@ -75,6 +78,8 @@ const emit = defineEmits<{
     value: HTMLInputElement["value"]
   ): HTMLInputElement["value"];
 }>();
+
+const showPassword = ref(false);
 </script>
 
 <template>
@@ -94,7 +99,24 @@ const emit = defineEmits<{
           :is="Loader"
         />
       </div>
+      <div class="absolute top-[27%] right-3" v-if="type === 'password'">
+        <a
+          @click="showPassword = false"
+          v-if="showPassword"
+          class="cursor-pointer active:translate-y-[1px]"
+        >
+          <EyeIcon class="h-5 w-5" />
+        </a>
+        <a
+          class="cursor-pointer active:translate-y-[1px]"
+          @click="showPassword = true"
+          v-else="showPassword"
+        >
+          <EyeSlashIcon class="h-5 w-5" />
+        </a>
+      </div>
       <input
+        :type="showPassword ? 'text' : type"
         v-bind="$attrs"
         :value="modelValue"
         @input="

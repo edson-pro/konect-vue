@@ -49,7 +49,7 @@ const titleClass = computed(() => {
   const texts = {
     primary: "text-primaryLight",
     danger: "text-red-500",
-    success: "text-green-500",
+    success: "text-green-400",
   }[color.value];
 
   return variant.value === "light" || variant.value === "outline"
