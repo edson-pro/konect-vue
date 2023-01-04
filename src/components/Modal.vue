@@ -42,7 +42,7 @@ const emit = defineEmits(["close"]);
     <TransitionRoot as="template" :show="open">
       <Dialog
         as="div"
-        class="fixed z-10 inset-0 overflow-y-auto"
+        class="fixed z-50 inset-0 overflow-y-auto"
         @close="emit('close')"
       >
         <div
@@ -77,7 +77,7 @@ const emit = defineEmits(["close"]);
           >
             <div
               :class="[
-                'dark:bg-gray-900 bg-white relative inline-block rounded-[4px] overflow-hidden shadow-xl transform transition-all my-8 align-middle w-full',
+                'dark:bg-gray-900 bg-white relative inline-block rounded-[4px] shadow-xl transform transition-all my-8 align-middle w-full',
                 sizeClass,
               ]"
             >

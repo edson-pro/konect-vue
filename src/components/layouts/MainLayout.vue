@@ -2,10 +2,10 @@
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 </script>
-<template lang="">
+<template>
   <div>
     <Navbar />
-    <slot />
+    <router-view> </router-view>
     <Footer />
   </div>
 </template>

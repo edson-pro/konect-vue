@@ -4,7 +4,7 @@ import useAuth from "../store/auth";
 import AuthServices from "../services/auth.services";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 
-const auth = useAuth();
+const { user } = useAuth();
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -47,8 +47,13 @@ const navLinks = [
         </div>
 
         <div class="flex gap-4 items-center">
-          <Btn href="/login" variant="outline">Sign in</Btn>
-          <Btn href="/register">Get started</Btn>
+          <template v-if="user">
+            <Btn href="/projects">Go to Dashboard</Btn>
+          </template>
+          <template v-else>
+            <Btn href="/auth/login" variant="outline">Sign in</Btn>
+            <Btn href="/auth/register">Get started</Btn>
+          </template>
         </div>
       </div>
     </div>

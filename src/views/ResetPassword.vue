@@ -7,6 +7,7 @@ import {
   SubmitButton,
   AppFormInput,
 } from "@/components/forms";
+import Logo from "@/components/Logo.vue";
 
 const initial = {
   password: "",
@@ -42,51 +43,59 @@ const handeResetPassword = ({ password }, actions) => {
 </script>
 
 <template>
-  <div class="px-3 mx-auto max-w-md">
-    <div
-      class="flex items-center my-10 gap-2 justify-center flex-col text-center"
-    >
-      <h4 class="text-xl font-medium title">Reset your password?</h4>
-      <p class="sub-title leading-7 max-w-md font-medium text-sm">
-        Lorem ipsum dolor sit amet, consectetur adipisicing <br />
-        elit, sed do eiusmod .
-      </p>
-    </div>
-    <AppForm
-      @submit="handeResetPassword"
-      :initialValues="initial"
-      :validationSchema="schema"
-    >
-      <AppFormStatus />
-      <AppFormInput
-        label="Your new password"
-        placeholder="New password"
-        name="password"
-        type="password"
-      /><AppFormInput
-        label="confirm new password"
-        placeholder="Confirm password"
-        name="confirmPassword"
-        type="password"
-      />
+  <div class="px-5 pt-8 pb-6 mx-auto flex items-center h-full justify-center">
+    <div class="w-full">
+      <div class="flex items-start gap-2 justify-center flex-col">
+        <router-link to="/"><Logo color="white" /></router-link>
 
-      <div class="mb-3">
-        <Checkbox label="I agree terms & conditions" />
+        <div class="mt-5 mb-4">
+          <h4 class="text-[17px] title mb-1 font-medium">
+            Create a new password.
+          </h4>
+          <p class="sub-title leading-7 max-w-md font-medium text-[13.5px]">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          </p>
+        </div>
       </div>
-
-      <SubmitButton @submit="handeResetPassword" :fullWidth="true">
-        Reset Password
-      </SubmitButton>
-
-      <div
-        class="my-5 flex items-center text-sm justify-center text-gray-400 font-medium gap-2"
+      <AppForm
+        @submit="handeResetPassword"
+        :initialValues="initial"
+        :validationSchema="schema"
       >
-        <span>Remember your password?</span>
-        <router-link to="/login"
-          ><span class="text-primaryLight">Sign in.</span></router-link
+        <AppFormStatus />
+        <AppFormInput
+          label="Your new password"
+          placeholder="New password"
+          name="password"
+          type="password"
+        />
+        <div class="mt-4">
+          <AppFormInput
+            label="confirm new password"
+            placeholder="Confirm password"
+            name="confirmPassword"
+            type="password"
+          />
+        </div>
+
+        <div class="my-3">
+          <Checkbox label="I agree terms & conditions" />
+        </div>
+
+        <SubmitButton @submit="handeResetPassword" :fullWidth="true">
+          Reset Password
+        </SubmitButton>
+
+        <div
+          class="mt-3 flex items-center text-sm justify-center text-gray-400 font-medium gap-2"
         >
-      </div>
-    </AppForm>
+          <span>Remember your password?</span>
+          <router-link to="/auth/login"
+            ><span class="text-primaryLight">Sign in.</span></router-link
+          >
+        </div>
+      </AppForm>
+    </div>
   </div>
 </template>
 

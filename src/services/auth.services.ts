@@ -48,7 +48,14 @@ class AuthServices {
   };
   currentUserChanged = (callback) => {
     return supabase.auth.onAuthStateChange((event, session) => {
-      return callback(session?.user);
+      const user = session?.user?.user_metadata;
+
+      return callback({
+        id: session?.user?.id,
+        email: user?.email,
+        names: user?.name,
+        photo: user?.picture,
+      });
     });
   };
   forgotPassword = async ({ email }) => {

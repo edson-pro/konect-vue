@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import MainLayout from "./layouts/MainLayout.vue";
-import useAuthComposable from "./composables/auth";
+import useAuthComposable from "@/composables/auth";
+import ModalManager from "@/components/ModalManager.vue";
 useAuthComposable();
 </script>
 
 <template>
-  <MainLayout>
-    <router-view> </router-view>
-  </MainLayout>
+  <ModalManager />
+  <router-view></router-view>
 </template>
 
 <style scoped></style>

@@ -68,7 +68,7 @@ const globalClass = computed(() => {
 
 const globalLabelClass = computed(() => {
   return (
-    "block mb-2  dark:text-gray-200 text-sm font-medium dark:text-gray-300 text-gray-700" +
+    "block mb-2  dark:text-gray-200 text-[13.2px] font-medium dark:text-gray-300 text-gray-700" +
     ` ${disabled?.value ? "pointer-events-none opacity-70" : ""}`
   );
 });
@@ -83,9 +83,9 @@ const showPassword = ref(false);
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <label :class="globalLabelClass" v-if="label">{{ label }}</label>
-    <div class="relative">
+  <div class="flex items-start flex-col">
+    <label :class="[globalLabelClass]" v-if="label">{{ label }}</label>
+    <div class="relative w-full">
       <div v-if="leftIcon">
         <component
           class="w-5 h-5 text-gray-400 absolute top-[23%] left-3"
@@ -134,7 +134,7 @@ const showPassword = ref(false);
     </div>
   </div>
   <span
-    class="text-[13px] capitalize dark:font-normal font-medium text-red-500"
+    class="text-[13px] w-full text-left block mt-1 capitalize dark:font-medium font-medium text-red-500"
     v-if="error"
     >{{ error }}</span
   >

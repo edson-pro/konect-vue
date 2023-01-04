@@ -11,14 +11,17 @@ import {
 } from "@/components/forms";
 import { ref } from "vue";
 import getRedirect from "@/utils/getRedirect";
+import Logo from "@/components/Logo.vue";
 
 const initial = {
-  names: "",
+  first_name: "",
+  last_name: "",
   email: "",
   password: "",
 };
 const schema = Yup.object({
-  names: Yup.string().required(),
+  flast_name: Yup.string().required(),
+  first_name: Yup.string().required(),
   email: Yup.string().required().email(),
   password: Yup.string().required().min(6),
 });
@@ -48,58 +51,77 @@ const handleGoogleLogin = () => {
 </script>
 
 <template>
-  <div class="px-3 mx-auto max-w-md">
-    <div
-      class="flex items-center my-10 gap-2 justify-center flex-col text-center"
-    >
-      <h4 class="text-xl title font-medium">Create a new account.</h4>
-      <p class="sub-title leading-7 max-w-md font-medium text-sm">
-        Lorem ipsum dolor sit amet, consectetur adipisicing <br />
-        elit, sed do eiusmod .
-      </p>
-    </div>
-    <AppForm
-      @submit="handeRegister"
-      :initialValues="initial"
-      :validationSchema="schema"
-    >
-      <AppFormStatus />
-      <AppFormInput label="Your names" placeholder="Full Names" name="names" />
-      <AppFormInput label="Your email" placeholder="Email" name="email" />
-      <AppFormInput
-        type="password"
-        placeholder="Password"
-        label="Your password"
-        name="password"
-      />
-      <div class="mb-3 flex items-center justify-between">
-        <Checkbox label="I agree terms & conditions" />
-      </div>
-      <SubmitButton @submit="handeRegister" :fullWidth="true">
-        Create your account
-      </SubmitButton>
-    </AppForm>
+  <div class="px-5 pt-8 pb-6 mx-auto flex items-center h-full justify-center">
+    <div class="w-full">
+      <div class="flex items-start gap-2 justify-center flex-col">
+        <router-link to="/"><Logo color="white" /></router-link>
 
-    <div className="flex justify-center or items-center text-gray-500 my-4">
-      <span className="text-sm mx-2 font-semibold">OR</span>
-    </div>
-    <div>
-      <Btn
-        :loading="googleLoading"
-        :leftIcon="GoogleIcon"
-        @click="handleGoogleLogin"
-        variant="default"
-        :fullWidth="true"
-        >Continue with Google</Btn
+        <div class="mt-5 mb-4">
+          <h4 class="text-[17px] title mb-1 font-medium">
+            Let’s get you set up
+          </h4>
+          <p class="sub-title leading-7 max-w-md font-medium text-[13.5px]">
+            If your team is already using Retool, you can
+            <router-link to="/auth/register" class="text-primaryLight">
+              sign in.</router-link
+            >
+          </p>
+        </div>
+      </div>
+      <AppForm
+        @submit="handeRegister"
+        :initialValues="initial"
+        :validationSchema="schema"
       >
-    </div>
-    <div
-      class="my-5 flex items-center text-sm justify-center text-gray-400 font-medium gap-2"
-    >
-      <span>Already have an account?</span>
-      <router-link to="/login"
-        ><span class="text-primaryLight">Sign in.</span></router-link
+        <AppFormStatus />
+        <div class="grid grid-cols-2 gap-3">
+          <AppFormInput
+            label="Last name"
+            placeholder="First Name"
+            name="first_name"
+          />
+          <AppFormInput
+            label="First name"
+            placeholder="Last Name"
+            name="last_name"
+          />
+        </div>
+        <AppFormInput label="Your email" placeholder="Email" name="email" />
+        <AppFormInput
+          type="password"
+          placeholder="Password"
+          label="Your password"
+          name="password"
+        />
+        <div class="mb-3 flex items-center justify-between">
+          <Checkbox label="I agree terms & conditions" />
+        </div>
+        <SubmitButton @submit="handeRegister" :fullWidth="true">
+          Create your account
+        </SubmitButton>
+      </AppForm>
+
+      <div className="flex justify-center or items-center text-gray-500 my-4">
+        <span className="text-sm mx-2 font-semibold">OR</span>
+      </div>
+      <div>
+        <Btn
+          :loading="googleLoading"
+          :leftIcon="GoogleIcon"
+          @click="handleGoogleLogin"
+          variant="default"
+          :fullWidth="true"
+          >Continue with Google</Btn
+        >
+      </div>
+      <div
+        class="mt-5 flex items-center text-[13.5px] justify-center text-gray-400 font-medium gap-2"
       >
+        <span>Already have an account?</span>
+        <router-link to="/auth/login"
+          ><span class="text-primaryLight">Sign in.</span></router-link
+        >
+      </div>
     </div>
   </div>
 </template>

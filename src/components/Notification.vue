@@ -84,7 +84,7 @@ const emit = defineEmits(["close"]);
         </template>
 
         <div class="flex flex-col items-start gap-3">
-          <h4 class="dark:text-white text-gray-800 font-semibold text-sm">
+          <h4 class="dark:text-white text-gray-800 font-medium text-sm">
             {{ title }}
           </h4>
           <p class="dark:text-gray-400 text-gray-500 font-medium text-[13px]">

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { defineComponent, h } from "vue";
 
-defineProps<{ msg: string }>();
-
 const navigation = {
   main: [
     { name: "About", href: "#" },

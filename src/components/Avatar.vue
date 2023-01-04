@@ -3,15 +3,15 @@ import { ref, computed, toRefs } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    src: string;
-    name: string;
+    src?: string;
+    name?: string;
     size: "xs" | "sm" | "md" | "lg" | "xl";
     variant: "filled" | "light" | "outline";
-    rounded: "xs" | "sm" | "md" | "lg" | "xl";
+    rounded: "xs" | "sm" | "md" | "lg" | "xl" | "full";
   }>(),
   {
     size: "md",
-    variant: "light",
+    variant: "filled",
     rounded: "sm",
   }
 );
@@ -42,9 +42,10 @@ const color_with_letters = [
 ];
 
 const color = computed(() => {
-  return color_with_letters.find((i) =>
+  const color = color_with_letters.find((i) =>
     i.letters.includes(name.value.toLowerCase().trim()[0] || "g")
   )?.color;
+  return variant.value === "light" ? color + "40" : color;
 });
 
 const sizeClass = computed(() => {
@@ -63,11 +64,12 @@ const roundedClass = computed(() => {
     md: "rounded-[8px]",
     lg: "rounded-[16px]",
     xl: "rounded-[32px]",
+    full: "rounded-full",
   }[rounded.value];
 });
 
 const avatarClass =
-  "flex items-center justify-center overflow-hidden m-1 capitalize";
+  "flex items-center justify-center overflow-hidden capitalize";
 </script>
 
 <template>
@@ -76,12 +78,15 @@ const avatarClass =
     <div
       :style="{ background: color }"
       :class="[
-        'h-full w-full text-white uppercase flex font-medium tracking-[1px] items-center justify-center',
+        'h-full  w-full text-white uppercase flex font-medium tracking-[1px] items-center justify-center',
         variantClass,
       ]"
       v-if="!src && name"
     >
-      <span>{{ name.split(" ")[0][0] + name.split(" ")[1][0] }}</span>
+      <span>{{
+        name.split(" ")[0][0] +
+        (name?.split(" ")[1] ? name?.split(" ")[1][0] : "")
+      }}</span>
     </div>
   </div>
 </template>

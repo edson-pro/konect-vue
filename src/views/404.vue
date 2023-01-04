@@ -1,15 +1,15 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="min-h-full pt-20 pb-10 flex flex-col bg-gray-900">
+  <div class="min-h-full pt-20 pb-24 flex flex-col bg-gray-900">
     <main
       class="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8"
     >
       <div class="flex-shrink-0 flex justify-center">
-        <a href="/" class="inline-flex">
+        <router-link to="/" class="inline-flex">
           <span class="sr-only">Workflow</span>
           <img class="h-24 w-auto" src="/images/404-error.png" alt="" />
-        </a>
+        </router-link>
       </div>
       <div class="py-8">
         <div class="text-center flex flex-col items-center justify-center">
@@ -20,14 +20,16 @@
               404 error
             </p>
           </div>
-          <h1 class="my-3 font-semibold text-gray-200 tracking-tight text-2xl">
+          <h1
+            class="mb-3 mt-5 font-semibold text-gray-200 tracking-tight text-lg"
+          >
             Page not found.
           </h1>
           <p class="mt-2 text-sm font-medium text-gray-400">
             Sorry, we couldn’t find the page you’re looking for.
           </p>
           <div class="mt-6">
-            <Btn>Take me back home</Btn>
+            <Btn href="/">Take me back home</Btn>
           </div>
         </div>
       </div>

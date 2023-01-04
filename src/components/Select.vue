@@ -12,6 +12,7 @@ const props = withDefaults(
     placeholder?: string;
     multiple?: boolean;
     loader?: any;
+    description?: string;
     modelValue?: any;
     label?: string;
     error?: string;
@@ -101,10 +102,16 @@ const optionsToShow = computed((e) => {
   <div :class="[containerClass, 'my-2']">
     <label
       v-if="label"
-      class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200"
+      class="block text-left mb-2 text-[13.3px] font-medium text-gray-700 dark:text-gray-200"
     >
       {{ label }}
     </label>
+    <span
+      v-if="description"
+      class="font-medium mb-3 text-left w-full block text-[12.5px] text-gray-400"
+    >
+      {{ description }}
+    </span>
     <VueSelect
       v-model="modelValue"
       @update:modelValue="handleChange"
@@ -186,9 +193,11 @@ const optionsToShow = computed((e) => {
         </span>
       </template>
     </VueSelect>
-    <span class="text-[13px] font-medium text-red-500" v-if="error">{{
-      error
-    }}</span>
+    <span
+      class="text-[13px] text-left w-fu block mt-1 font-medium text-red-500"
+      v-if="error"
+      >{{ error }}</span
+    >
   </div>
 </template>
 

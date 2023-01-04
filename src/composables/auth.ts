@@ -7,9 +7,10 @@ export function useAuth() {
     new AuthServices().currentUserChanged((user) => {
       if (user) {
         setUser({
-          email: user.email,
-          id: user.id,
-          username: user.email,
+          email: user?.email,
+          id: user?.id,
+          names: user?.names,
+          photo: user?.photo,
         });
       }
     });
