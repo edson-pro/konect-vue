@@ -1,6 +1,7 @@
 import supabase from "../lib/superbase";
 
 const origin_url = import.meta.env.VITE_ORIGIN_URL;
+
 class AuthServices {
   createAccount = async ({ email, password }: any) => {
     const { error, data } = await supabase.auth.signUp({

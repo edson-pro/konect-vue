@@ -7,7 +7,7 @@ import AppFormInput from "@/components/forms/AppFormInput.vue";
 import AppFormStatus from "@/components/forms/AppFormStatus.vue";
 import SubmitButton from "@/components/forms/SubmitButton.vue";
 import AppFormSelect from "@/components/forms/AppFormSelect.vue";
-import { createProject } from "@/services/projects.services";
+// import { createProject } from "@/services/projects.services";
 import useToast from "@/composables/useToast";
 import router from "@/router";
 
@@ -26,23 +26,23 @@ const schema = Yup.object({
 const toast = useToast();
 
 const handeSubmit = ({ name, category }, actions) => {
-  return createProject({ name, category })
-    .then(({ id }) => {
-      actions.setIsLoading(false);
-      emits("close");
-      toast.show({
-        title: "Project Created Successfully",
-        message: "your project was created successfully",
-      });
-      router.push({ path: `/projects/${id}` });
-    })
-    .catch(({ message }) => {
-      actions.setStatus({
-        type: "error",
-        message: message,
-      });
-      actions.setIsLoading(false);
-    });
+  // return createProject({ name, category })
+  //   .then(({ id }) => {
+  //     actions.setIsLoading(false);
+  //     emits("close");
+  //     toast.show({
+  //       title: "Project Created Successfully",
+  //       message: "your project was created successfully",
+  //     });
+  //     router.push({ path: `/projects/${id}` });
+  //   })
+  //   .catch(({ message }) => {
+  //     actions.setStatus({
+  //       type: "error",
+  //       message: message,
+  //     });
+  //     actions.setIsLoading(false);
+  //   });
 };
 
 const emits = defineEmits(["close"]);

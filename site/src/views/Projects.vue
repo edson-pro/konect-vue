@@ -7,7 +7,7 @@ import useFetchProjects from "@/composables/useFetchProjects";
 import useConfirm from "@/composables/useConfirm";
 import Empty from "@/components/Empty.vue";
 import { ref } from "vue";
-import { deleteProject } from "@/services/projects.services";
+// import { deleteProject } from "@/services/projects.services";
 import {
   TrashIcon,
   PencilSquareIcon,
@@ -39,13 +39,13 @@ const { confirm, close, setLoading } = useConfirm({
 
 const handleDeleteProject = () => {
   setLoading(true);
-  return deleteProject().then((e) => {
-    close();
-    toast.show({
-      title: "Project deleted successfully",
-      message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-    });
-  });
+  // return deleteProject().then((e) => {
+  //   close();
+  //   toast.show({
+  //     title: "Project deleted successfully",
+  //     message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+  //   });
+  // });
 };
 
 const handeMenuAction = ({ action, meta }) => {
