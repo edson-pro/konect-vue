@@ -48,12 +48,23 @@ class ClientApi {
       return client.get(this.route + "/" + this.docId);
     } else {
       let q = {};
-      function objectToQueryParams(obj) {
-        return `${obj.field}${obj.operator}${obj.value}`;
-      }
+
       if (this.conditions.length) {
         this.conditions.forEach((e) => {
-          q[e.field] = e.value;
+          const field = e.field;
+          const operators = {
+            "==": {
+              [field]: e.value,
+            },
+            "<": {
+              [field + "_lt"]: e.value,
+            },
+            ">": {
+              [field + "_gt"]: e.value,
+            },
+          };
+
+          q = { ...q, ...operators[e.operator] };
         });
       }
 
@@ -64,7 +75,9 @@ class ClientApi {
       return client
         .get(this.route, { params: q })
         .then((e) => e.data)
-        .catch((e) => ({ code: e.code, message: e.message }));
+        .catch((e) => {
+          throw { code: e.code, message: e.message };
+        });
     }
   }
 }

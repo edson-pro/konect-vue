@@ -8,20 +8,20 @@ const handled = async () => {
   //   .then((e) => {
   //     console.log(e);
   //   });
-  // await app
-  //   .collection("projects")
-  //   .add({
-  //     members: 3,
-  //     name: "cohot 3 atlp",
-  //     category: "events",
-  //     createdAt: "12/02/2024",
-  //   })
-  //   .then((e) => {
-  //     console.log(e);
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //   });
+  await app
+    .collection("projects")
+    .add({
+      members: 3,
+      name: "cohot 3 atlp",
+      category: "events",
+      createdAt: "12/02/2024",
+    })
+    .then((e) => {
+      console.log(e);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
   // app
   //   .collection("projects")
   //   .doc(6)
@@ -51,18 +51,19 @@ const handled = async () => {
   //   .then((e) => {
   //     console.log(e);
   //   });
-  app
-    .collection("projects")
-    .where("members", "<=", 4)
-    .where("category", "==", "events")
-    .limit(2)
-    .get()
-    .then((e) => {
-      console.log(e);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  // app
+  //   .collection("projects")
+  //   .where("members", "<", 4)
+  //   .where("members", ">", 1)
+  //   .where("category", "==", "events")
+  //   .limit(2)
+  //   .get()
+  //   .then((e) => {
+  //     console.log(e);
+  //   })
+  //   .catch((e) => {
+  //     console.log(e);
+  //   });
 };
 
 // const obsevable: any = liveQuery(() => db.projects.toArray());
